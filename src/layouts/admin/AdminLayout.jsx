@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LaptopOutlined, NotificationOutlined, UserOutlined, ShopOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
@@ -29,6 +29,13 @@ const AdminLayout = () => {
         console.log('click ', e.key);
         navigate(e.key)
     }
+    const isLogin = localStorage.getItem("token") ? localStorage.getItem("token") : null;
+    useEffect(() => {
+        // laays tu local 
+        if (isLogin == null) {
+            navigate("/login");
+        }
+    })
     return (
         <Layout>
             <Header
