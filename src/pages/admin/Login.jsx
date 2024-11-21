@@ -2,12 +2,18 @@ import React from 'react';
 import { Button, Checkbox, Form, Input, Layout } from 'antd';
 import { useDispatch } from 'react-redux';
 import { login } from '../../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const dispath = useDispatch();
+    const navigate = useNavigate();
     const onFinish = (values) => {
         console.log('Success:', values);
-        dispath(login(values))
+        dispath(login(values)).then((ress) => {
+            navigate("/admin");
+        }).catch(err => console.log("Đăng nhập thất bài"));
+        // kieemr tra neeu thanh cong thi chuyen sang admin 
+
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);

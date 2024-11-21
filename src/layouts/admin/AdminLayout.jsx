@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { LaptopOutlined, NotificationOutlined, UserOutlined, ShopOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Button, Layout, Menu, theme } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 const { Header, Content, Footer, Sider } = Layout;
 
 
@@ -29,13 +30,20 @@ const AdminLayout = () => {
         console.log('click ', e.key);
         navigate(e.key)
     }
-    const isLogin = localStorage.getItem("token") ? localStorage.getItem("token") : null;
+    const isLogin = Cookies.get("role") ? JSON.parse(Cookies.get("role")) : [];
     useEffect(() => {
         // laays tu local 
-        if (isLogin == null) {
+        if (!isLogin.some((role) => role.roleName === 'ADMIN' || role.roleName === 'SUB_ADMIN')) {
             navigate("/login");
         }
-    })
+    });
+
+    const handleLogout = () => {
+        Cookies.remove("token");
+        Cookies.remove("role");
+        Cookies.remove("username");
+        navigate("/login")
+    }
     return (
         <Layout>
             <Header
@@ -45,7 +53,7 @@ const AdminLayout = () => {
                 }}
             >
                 <div className="demo-logo" />
-
+                <Button onClick={handleLogout}>Logout</Button>
             </Header>
             <Content
                 style={{
