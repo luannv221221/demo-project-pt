@@ -24,7 +24,7 @@ export const BASE_URL_AUTH = axios.create({
 const token = Cookies.get("token");
 const addAuthToken = (instance) => {
     instance.interceptors.request.use((config) => {
-        console.log("Token né ", token);
+
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
             console.log(config.headers.Authorization = `Bearer ${token}`);

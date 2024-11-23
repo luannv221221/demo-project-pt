@@ -2,6 +2,8 @@ import { Children } from "react";
 import AdminLayout from "../layouts/admin/AdminLayout";
 import Dashboard from "../pages/admin/Dashboard";
 import Category from "../pages/admin/Category";
+import Product from "../pages/admin/Product";
+import ProductAdd from "../pages/admin/ProductAdd";
 
 const privateRoutes = [
     {
@@ -15,6 +17,16 @@ const privateRoutes = [
             {
                 path: "category",
                 element: <Category />
+            }
+            ,
+            {
+                path: "product",
+                element: <Product />
+            }
+            ,
+            {
+                path: "add-product",
+                element: <ProductAdd />
             }
         ]
     }
